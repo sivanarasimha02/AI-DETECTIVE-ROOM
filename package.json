@@ -1,0 +1,16 @@
+{
+  "name": "ai-detective-room",
+  "version": "2.0.0",
+  "private": true,
+  "description": "3D Mystery Investigation Game with Google Gemini AI",
+  "scripts": {
+    "dev": "concurrently \"npm run server --prefix server\" \"npm run dev --prefix client\"",
+    "client": "npm run dev --prefix client",
+    "server": "npm run dev --prefix server",
+    "test": "npm run test --prefix server && npm run test --prefix client"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
+
