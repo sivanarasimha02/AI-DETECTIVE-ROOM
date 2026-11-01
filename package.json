@@ -4,6 +4,7 @@
   "private": true,
   "description": "3D Mystery Investigation Game with Google Gemini AI",
   "scripts": {
+    "start": "node server/src/index.js",
     "dev": "concurrently \"npm run server --prefix server\" \"npm run dev --prefix client\"",
     "client": "npm run dev --prefix client",
     "server": "npm run dev --prefix server",

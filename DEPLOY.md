@@ -88,10 +88,10 @@ Deploy the backend first so you have your production API URL ready for the front
    - **Name**: `ai-detective-room-api` (or your preferred name)
    - **Region**: Select the region closest to your MongoDB Atlas cluster (e.g. Frankfurt, Oregon, Singapore).
    - **Branch**: `main`
-   - **Root Directory**: `server` *(Important: Enter `server`)*
+   - **Root Directory**: `server` ⚠️ *(CRITICAL: You must type `server` here. If left blank, Render will look for `src/src/index.js` and fail with "Cannot find module '/opt/render/project/src/src/index.js'")*
    - **Runtime**: `Node`
    - **Build Command**: `npm install`
-   - **Start Command**: `node src/index.js`
+   - **Start Command**: `node src/index.js` *(or `npm start`)*
    - **Instance Type**: `Free`
 6. Scroll down to **Environment Variables** and click **Add Environment Variable**:
 
@@ -172,7 +172,23 @@ Now that you have your live Vercel URL:
 
 ## Common Troubleshooting
 
-### 1. Render Free Tier Cold Start
+### 1. Error: `Cannot find module '/opt/render/project/src/src/index.js'`
+This error occurs when the **Root Directory** setting in Render is left blank or incorrect.
+Render's default root directory is `/opt/render/project/src`. When you tell it to run `node src/index.js` without setting the Root Directory, it searches for `/opt/render/project/src/src/index.js`, which doesn't exist.
+
+**How to fix:**
+1. In your Render Dashboard, go to your Web Service -> **Settings**.
+2. Find the **Root Directory** field and set it to:
+   ```
+   server
+   ```
+3. Make sure **Start Command** is:
+   ```
+   node src/index.js
+   ```
+4. Click **Save Changes** (Render will automatically redeploy and succeed).
+
+### 2. Render Free Tier Cold Start
 Render's free tier spins down inactive web services after 15 minutes of inactivity. When you send the first request after an idle period, it can take 40–50 seconds to boot up. Subsequent requests respond instantly.
 
 ### 2. MongoDB Connection Timeout
